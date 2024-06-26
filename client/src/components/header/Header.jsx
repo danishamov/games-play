@@ -3,12 +3,12 @@ const Header = () => {
         <header>
             {/* <!-- Navigation --> */}
             <h1>
-                <a className="home" href="#">
+                <a className="home" href="/">
                     GamesPlay
                 </a>
             </h1>
             <nav>
-                <a href="#">All games</a>
+                <a href="/games">All games</a>
                 {/* <!-- Logged-in users --> */}
                 <div id="user">
                     <a href="#">Create Game</a>
