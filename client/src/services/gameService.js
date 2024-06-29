@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost3030/jsonstore";
+const baseUrl = "http://localhost:3030/jsonstore";
 
 export const create = async (data) => {
     const response = await fetch(`${baseUrl}/games`, {
