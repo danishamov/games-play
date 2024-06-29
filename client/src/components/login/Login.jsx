@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 export default function Login() {
     return (
         <section id="login-page" className="auth">
@@ -26,7 +27,7 @@ export default function Login() {
                     <p className="field">
                         <span>
                             If you don't have profile click{" "}
-                            <a href="/register">here</a>
+                            <Link to="/register">here</Link>
                         </span>
                     </p>
                 </div>
