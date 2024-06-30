@@ -13,7 +13,7 @@ export default function GameCreate() {
 
             navigate("/games");
         } catch (err) {
-            //Err notification
+            //Error notification
             console.log(err);
         }
     };
