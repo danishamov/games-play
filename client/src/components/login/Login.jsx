@@ -1,8 +1,12 @@
+import useForm from "../../hooks/useForm";
+
 import { Link } from "react-router-dom";
+
 export default function Login() {
+    const { values, onChange, onSubmit } = useForm({ email: "", password: "" });
     return (
         <section id="login-page" className="auth">
-            <form id="login">
+            <form id="login" onSubmit={onSubmit}>
                 <div className="container">
                     <div className="brand-logo" />
                     <h1>Login</h1>
@@ -12,12 +16,16 @@ export default function Login() {
                         id="email"
                         name="email"
                         placeholder="Sokka@gmail.com"
+                        onChange={onChange}
+                        value={values.email}
                     />
                     <label htmlFor="login-pass">Password:</label>
                     <input
                         type="password"
                         id="login-password"
                         name="password"
+                        onChange={onChange}
+                        value={values.password}
                     />
                     <input
                         type="submit"
