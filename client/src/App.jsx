@@ -25,17 +25,29 @@ function App() {
         navigate(Path.Home);
     };
 
+    const registerSubmitHandler = async (values) => {
+        console.log(values);
+    };
+
+    const values = {
+        loginSubmitHandler,
+        registerSubmitHandler,
+        username: auth.username,
+        email: auth.email,
+        isAuthenticated: !!auth.username,
+    };
+
     return (
-        <AuthContext.Provider value={{ loginSubmitHandler }}>
+        <AuthContext.Provider value={values}>
             <div id="box">
                 <Header />
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/games" element={<GameList />} />
-                    <Route path="/game/create" element={<GameCreate />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/game/:gameId" element={<GameDetails />} />
+                    <Route path={Path.Home} element={<Home />} />
+                    <Route path={Path.Games} element={<GameList />} />
+                    <Route path={Path.Create} element={<GameCreate />} />
+                    <Route path={Path.Login} element={<Login />} />
+                    <Route path={Path.Register} element={<Register />} />
+                    <Route path={Path.Details} element={<GameDetails />} />
                 </Routes>
             </div>
         </AuthContext.Provider>
