@@ -43,7 +43,8 @@ export default function Login() {
                     <input
                         type="submit"
                         className="btn submit"
-                        defaultValue="Login"
+                        // defaultValue="Login"
+                        value="Login"
                     />
                     <p className="field">
                         <span>
