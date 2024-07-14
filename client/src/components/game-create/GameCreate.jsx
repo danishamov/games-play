@@ -56,7 +56,7 @@ export default function GameCreate() {
                     <input
                         className="btn submit"
                         type="submit"
-                        defaultValue="Create Game"
+                        value="Create Game"
                     />
                 </div>
             </form>
