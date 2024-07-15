@@ -24,7 +24,6 @@ export default function GameDetails() {
 
         const newComment = await commentService.create(
             gameId,
-            // formData.get("username"),
             formData.get("comment")
         );
         setComments((state) => [
