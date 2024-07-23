@@ -51,7 +51,7 @@ export default function Register() {
                     <input
                         className="btn submit"
                         type="submit"
-                        defaultValue="Register"
+                        value="Register"
                     />
                     <p className="field">
                         <span>

@@ -1,8 +1,6 @@
-import { useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import AuthContext from "./context/authContext";
-import * as authService from "./services/authService";
+import { AuthProvider } from "./context/authContext";
 import Path from "./paths";
 
 import Header from "./components/header/Header";
@@ -15,53 +13,8 @@ import GameDetails from "./components/game-details/GameDetails";
 import LogOut from "./components/logOut/Logout";
 
 function App() {
-    const navigate = useNavigate();
-    const [auth, setAuth] = useState(() => {
-        localStorage.removeItem("accessToken");
-
-        return {};
-    });
-
-    const loginSubmitHandler = async (values) => {
-        const result = await authService.login(values.email, values.password);
-
-        setAuth(result);
-
-        localStorage.setItem("accessToken", result.accessToken);
-
-        navigate(Path.Home);
-    };
-
-    const registerSubmitHandler = async (values) => {
-        const result = await authService.register(
-            values.email,
-            values.password
-        );
-
-        setAuth(result);
-
-        localStorage.setItem("accessToken", result.accessToken);
-
-        navigate(Path.Home);
-    };
-
-    const logoutHandler = () => {
-        setAuth({});
-
-        localStorage.removeItem("accessToken");
-        navigate(Path.Home);
-    };
-    const values = {
-        loginSubmitHandler,
-        registerSubmitHandler,
-        logoutHandler,
-        username: auth.username || auth.email,
-        email: auth.email,
-        isAuthenticated: !!auth.accessToken,
-    };
-
     return (
-        <AuthContext.Provider value={values}>
+        <AuthProvider>
             <div id="box">
                 <Header />
                 <Routes>
@@ -74,7 +27,7 @@ function App() {
                     <Route path={Path.LogOut} element={<LogOut />} />
                 </Routes>
             </div>
-        </AuthContext.Provider>
+        </AuthProvider>
     );
 }
 
