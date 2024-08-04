@@ -5,13 +5,13 @@ import * as gameService from "../../services/gameService";
 import * as commentService from "../../services/commentService";
 import AuthContext from "../../context/authContext";
 import reducer from "./commentReducer";
+import useForm from "../../hooks/useForm";
 
 export default function GameDetails() {
     const { email } = useContext(AuthContext);
     const [game, setGame] = useState({});
     // const [comments, setComments] = useState([]);
     const [comments, dispatch] = useReducer(reducer, []);
-
     const { gameId } = useParams();
 
     useEffect(() => {
@@ -25,15 +25,8 @@ export default function GameDetails() {
         });
     }, [gameId]);
 
-    const addCommentHandler = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget);
-
-        const newComment = await commentService.create(
-            gameId,
-            formData.get("comment")
-        );
+    const addCommentHandler = async () => {
+        const newComment = await commentService.create(gameId, values.comment);
 
         newComment.owner = { email };
         // setComments((state) => [
@@ -47,6 +40,10 @@ export default function GameDetails() {
             payload: newComment,
         });
     };
+
+    const { values, onChange, onSubmit } = useForm(addCommentHandler, {
+        comment: "",
+    });
 
     return (
         <section id="game-details">
@@ -98,10 +95,12 @@ export default function GameDetails() {
         creators of the current game ) */}
             <article className="create-comment">
                 <label>Add new comment:</label>
-                <form className="form" onSubmit={addCommentHandler}>
+                <form className="form" onSubmit={onSubmit}>
                     {/* <input type="text" name="username" placeholder="username" /> */}
                     <textarea
                         name="comment"
+                        value={values.comment}
+                        onChange={onChange}
                         placeholder="Comment......"
                         defaultValue={""}
                     />
